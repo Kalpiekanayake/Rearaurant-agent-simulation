@@ -1,26 +1,35 @@
+# main.py
+
 from agents import TableAgent, KitchenAgent
 
-# Create multiple tables
-tables = [TableAgent(i) for i in range(1, 4)]  # Tables 1, 2, 3
+# Create agents
+table1 = TableAgent(1)
+table2 = TableAgent(2)
 
-# Create kitchen agent
 kitchen = KitchenAgent()
 
-# Simulate orders
-orders_to_place = [
-    (1, "Fried Rice"),
-    (2, "Noodles"),
-    (1, "Coke"),
-    (3, "Burger"),
-    (2, "Water")
-]
+# Tables place orders
+order1 = table1.place_order(["Fried Rice", "Coke"])
+order2 = table2.place_order(["Kottu"])
 
-# Tables place orders and kitchen receives them
-for table_num, item in orders_to_place:
-    table = tables[table_num - 1]  # get table object
-    order = table.place_order(item)
-    kitchen.receive_order(order)
+# Kitchen receives orders
+kitchen.receive_order(order1)
+kitchen.receive_order(order2)
 
-# Process all orders in kitchen
-print("\n--- Processing Orders ---")
-kitchen.process_orders()
+# First status check
+table1.check_orders()
+table2.check_orders()
+
+print("\n--- Kitchen updating orders ---")
+kitchen.update_orders()
+
+# Second status check
+table1.check_orders()
+table2.check_orders()
+
+print("\n--- Kitchen updating orders again ---")
+kitchen.update_orders()
+
+# Final status check
+table1.check_orders()
+table2.check_orders()
