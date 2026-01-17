@@ -9,7 +9,7 @@
 - Multiple orders
 - Order objects with structured data
 - Improved agent interaction
-- 
+  
 ## Version 0.3 (Planned)
 - Order lifecycle (placed, preparing, ready, served)
 - Kitchen agent updates order status
