@@ -1,41 +1,46 @@
 # main.py
 
-from agents import TableAgent, KitchenAgent, CashierAgent
+from database import init_db
+from agents import TableAgent, KitchenAgent
 
-# Step 0: Setup menu
-menu = {
-    "Fried Rice": 5.0,
-    "Coke": 1.5,
-    "Kottu": 6.0,
-    "Burger": 4.0
-}
+# Step 0: Initialize DB
+init_db()
 
-# Step 1: Create agents
+# Step 1: Create agents (3 tables)
 table1 = TableAgent(1)
 table2 = TableAgent(2)
+table3 = TableAgent(3)
 kitchen = KitchenAgent()
-cashier = CashierAgent(menu)
 
 # Step 2: Tables place orders
-order1 = table1.place_order(["Fried Rice", "Coke"])
-order2 = table2.place_order(["Kottu", "Coke"])
+table1.place_order(["Fried Rice", "Coke"])
+table2.place_order(["Kottu", "Coke"])
+table3.place_order(["Burger", "Coke"])
 
-# Step 3: Kitchen receives orders
-kitchen.receive_order(order1)
-kitchen.receive_order(order2)
-
-# Step 4: Check current status
+# Step 3: First check
 table1.check_orders()
 table2.check_orders()
+table3.check_orders()
 
-# Step 5: Kitchen updates orders (simulate time)
+# Step 4: Kitchen updates orders
 print("\n--- Kitchen updating orders ---")
 kitchen.update_orders()
 
-# Step 6: Tables check orders again
+# Step 5: Check again
 table1.check_orders()
 table2.check_orders()
+table3.check_orders()
 
-# Step 7: Tables request bill from cashier
-table1.request_bill(cashier)
-table2.request_bill(cashier)
+# Step 6: Kitchen updates orders again
+print("\n--- Kitchen updating orders again ---")
+kitchen.update_orders()
+
+# Step 7: Final status check
+table1.check_orders()
+table2.check_orders()
+table3.check_orders()
+
+# Step 8: Request bills
+table1.request_bill()
+table2.request_bill()
+table3.request_bill()
