@@ -70,3 +70,16 @@ class KitchenAgent:
                 print(f"Order {order_id} is now READY")
         conn.commit()
         conn.close()
+
+class CashierAgent:
+    def __init__(self, menu):
+        self.menu = menu
+
+    def calculate_bill(self, orders):
+        total = 0
+        for order in orders:
+            for item in order["items"]:
+                price = self.menu.get(item, 0)
+                total += price
+        return total
+
